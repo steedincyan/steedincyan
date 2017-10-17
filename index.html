@@ -391,8 +391,7 @@
 
       
         
-          
-            <h3 id="调试线程化的程序"><a href="#调试线程化的程序" class="headerlink" title="调试线程化的程序"></a>调试线程化的程序</h3><p>线程问题主要来自四个方面：</p>
+          <h3 id="调试线程化的程序"><a href="#调试线程化的程序" class="headerlink" title="调试线程化的程序"></a>调试线程化的程序</h3><p>线程问题主要来自四个方面：</p>
 <ol>
 <li><p>死锁</p>
 </li>
@@ -404,27 +403,14 @@
 </li>
 </ol>
 <ul>
-<li>优先级不可靠。<br>使用yield（）来降低优先级更可靠。</li>
-</ul>
-<h3 id="线程协作机制"><a href="#线程协作机制" class="headerlink" title="线程协作机制"></a>线程协作机制</h3><h4 id="协作式线程"><a href="#协作式线程" class="headerlink" title="协作式线程"></a>协作式线程</h4><ul>
-<li>程序开发员可以精确地决定某个线程何时会被其他线程挂起，允许它们与对方有效地合作。</li>
-<li><em>缺点</em>在于某些恶意或是写得不好的线程会消耗所有可获得的 CPU 时间，导致其他线程“饥饿”。</li>
-<li>在协作式模型中，是否能保证线程正常放弃处理器，不掠夺其他线程的执行时间，则完全取决于程序员。</li>
-</ul>
-<ol>
-<li>调用 yield() 方法能够将当前的线程从处理器中移出到准备就绪队列中。<br>如果线程正拥有一个锁，则当它调用 yield() 时不能够释放这个锁。这就意味着即使这个线程已经被挂起，等待这个锁释放的其他线程依然不能继续运行。为了缓解这个问题，最好不在同步方法中调用 yield 方法。</li>
-<li>另一个方法则是调用 sleep() 方法，使线程放弃处理器，并且在 sleep 方法中指定的时间间隔内睡眠。</li>
-<li>另外一个解决方法则是调用 wait() 方法，使处理器放弃它当前拥有的对象的锁。<br>如果对象在方法级别上使同步的，这种方法能够很好的工作。因为它仅仅使用了一个锁。如果它使用 fine-grained 锁，则 wait() 将无法放弃这些锁。此外，一个因为调用 wait() 方法而阻塞的线程，只有当其他线程调用 notifyAll() 时才会被唤醒。</li>
-</ol>
-<h4 id="抢占式线程"><a href="#抢占式线程" class="headerlink" title="抢占式线程"></a>抢占式线程</h4><p>操作系统可以在任何时候打断线程。</p>
-<p><strong>JVM 规范并没有特别规定线程模型，Java 开发员必须编写可在两种模型上正确运行的程序。</strong></p>
-<h3 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h3><ul>
-<li>Java 多线程支持在版本 1.1 和版本 1.2 中做了重大修订，stop()、suspend() 和 resume() 函数已不提倡使用。</li>
-<li>必须确保不在同步代码中包含那些阻塞（如IO）调用，或确认在一个用同步阻塞代码的对象中存在非同步方法来取消阻塞调用。</li>
-<li>原子操作代码块中的代码段一旦开始执行，就要在该线程被换出处理器之前执行完毕。在 Java 编程中，分配一个小于 32 位的变量空间是一种原子操作，而此外象 double 和 long 这两个 64 位数据类型的分配就不是原子的。</li>
-</ul>
-
-          
+<li>优先级不可靠。<br>使用yield（）来降低优先级更可靠。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/03/Java多线程笔记/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -551,55 +537,19 @@
 
       
         
-          
-            <h1 id="Spark-笔记"><a href="#Spark-笔记" class="headerlink" title="Spark 笔记"></a>Spark 笔记</h1><h2 id="Features-over-Hadoop"><a href="#Features-over-Hadoop" class="headerlink" title="Features over Hadoop"></a>Features over Hadoop</h2><ul>
+          <h1 id="Spark-笔记"><a href="#Spark-笔记" class="headerlink" title="Spark 笔记"></a>Spark 笔记</h1><h2 id="Features-over-Hadoop"><a href="#Features-over-Hadoop" class="headerlink" title="Features over Hadoop"></a>Features over Hadoop</h2><ul>
 <li>latency<br>通过减少disk操作来提升计算效率</li>
 <li>fault tolerance<br>只保存数据和函数过程，不保存中间结果</li>
 </ul>
 <h2 id="Transform-and-Action"><a href="#Transform-and-Action" class="headerlink" title="Transform and Action"></a>Transform and Action</h2><ul>
-<li>Transform is <strong>lazy</strong><br>RDD的map等操作是lazy的<br><img src="/images/CourseraSpark/3A54DF7ACD01ADD1E78DFF7C7249721F.png" alt="Screen Shot 2017-09-27 at 13.41.34.png"><br><img src="/images/CourseraSpark/0B07694C63520C7B18FF1972A23A1E68.png" alt="Screen Shot 2017-09-27 at 14.11.49.png"></li>
-<li>Action is <strong>eager</strong><br>RDD的reduce等操作是eager(立即求值)的<br><img src="/images/CourseraSpark/EC15E365E94153D5C1B4DBB2F894A7D4.png" alt="Screen Shot 2017-09-27 at 13.41.52.png"><br><img src="/images/CourseraSpark/06344801422E23C5646ABAA8562F5B00.png" alt="Screen Shot 2017-09-27 at 14.12.02.png"></li>
-</ul>
-<hr>
-<ol>
-<li>在求值之前，Spark会分析和优化操作链。</li>
-<li>对RDD进行求值的时候，每次对10个元素求值，保存结果，然后继续对剩下的元素求值。</li>
-</ol>
-<h2 id="Cache-and-Persistence"><a href="#Cache-and-Persistence" class="headerlink" title="Cache and Persistence"></a>Cache and Persistence</h2><ul>
-<li><p>RDDs are computed each time you run a ACTION on them<br><img src="/images/CourseraSpark/9FA3AABFA5AC230AC1500E333522BF4A.png" alt="Screen Shot 2017-09-27 at 14.31.11.png"><br>points 被计算了i次<br><img src="/images/CourseraSpark/C0A37D99B5D2FC26E30F1A83A5CB1D88.png" alt="Screen Shot 2017-09-27 at 14.36.14.png"><br>points将不再被重复计算</p>
-</li>
-<li><p>cache可用的参数：<br><img src="/images/CourseraSpark/82D7071F21BA9A8DF9230BC19A97F867.png" alt="Screen Shot 2017-09-27 at 14.42.26.png"></p>
-</li>
-</ul>
-<h3 id="Cluster-Manager"><a href="#Cluster-Manager" class="headerlink" title="Cluster Manager"></a>Cluster Manager</h3><ul>
-<li>主程序不直接执行函数，函数和数据被分发到集群节点<br><img src="/images/CourseraSpark/D66FE639FBECB7F6C67B43DCA09337FF.png" alt="Screen Shot 2017-09-27 at 15.07.52.png"></li>
-</ul>
-<h3 id="Pair-RDD"><a href="#Pair-RDD" class="headerlink" title="Pair RDD"></a>Pair RDD</h3><p><img src="/images/CourseraSpark/D4171920FB50AE82D00D36A1095E88FA.png" alt="Screen Shot 2017-09-28 at 09.21.00.png"></p>
-<h1 id="Shuffle-and-Partition"><a href="#Shuffle-and-Partition" class="headerlink" title="Shuffle and Partition"></a>Shuffle and Partition</h1><ul>
-<li>groupByKey产生的每个键值对只能存在于单个node上，不能跨node。默认触发hash分区。</li>
-<li>分区后的数据通常要persist，不然每次对分区数据的引用，都会触发分区操作<br>range分区：<br><img src="/images/CourseraSpark/7AAB264F3B8E01DC3C240ADBCDEA0FF7.png" alt="Screen Shot 2017-09-30 at 12.54.59.png"></li>
-</ul>
-<p>*只有以下操作可以保持分区，其他会清除分区记忆：<br><img src="/images/CourseraSpark/F6EF404E010FE5C1ECCD4B05FA98BD18.png" alt="Screen Shot 2017-09-30 at 13.02.36.png"></p>
-<p>其他操作如map，可以直接改变pair RDD的key，导致原有分区失去意义：<br><img src="/images/CourseraSpark/F1F97F26C425C5F493E26A58694608AB.png" alt="Screen Shot 2017-09-30 at 13.18.48.png"></p>
-<h1 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h1><ul>
-<li>一个父RDD被多个子RDD依赖 == wide dependency<br><img src="/images/CourseraSpark/2D94ACF5E99EDB392A393F7D0BA609CD.png" alt="Screen Shot 2017-09-30 at 14.07.11.png"></li>
-<li>依赖的类型：<br><img src="/images/CourseraSpark/322F9136758229A0DCDCABAB168DB66F.png" alt="Screen Shot 2017-09-30 at 14.12.16.png"><h2 id="分析依赖的类型："><a href="#分析依赖的类型：" class="headerlink" title="分析依赖的类型："></a>分析依赖的类型：</h2></li>
-</ul>
-<ol>
-<li>使用dependencies方法<br><img src="/images/CourseraSpark/2A75B21031B4E580B78D6E241E1743CC.png" alt="Screen Shot 2017-09-30 at 14.14.22.png"><br>2.使用toDebugString方法<br><img src="/images/CourseraSpark/E8C9BF2B65F984DF0654E6260A886D59.png" alt="Screen Shot 2017-09-30 at 14.15.38.png"></li>
-</ol>
-<h1 id="Data-Frame"><a href="#Data-Frame" class="headerlink" title="Data Frame"></a>Data Frame</h1><h2 id="Catalyst"><a href="#Catalyst" class="headerlink" title="Catalyst"></a>Catalyst</h2><p>Catalyst是Spark SQL的optimizer，通过以下原理优化Spark SQL操作：</p>
-<h3 id="首先需要假定Catalyst满足："><a href="#首先需要假定Catalyst满足：" class="headerlink" title="首先需要假定Catalyst满足："></a>首先需要假定Catalyst满足：</h3><p>1.知晓所有数据类型<br>2.知道数据schema，即数据组织方式<br>3.知晓将对数据进行的操作的细节</p>
-<h3 id="优化目标主要有："><a href="#优化目标主要有：" class="headerlink" title="优化目标主要有："></a>优化目标主要有：</h3><p>1.对SQL操作的顺序重新排列<br>2.不去读取与操作无关的数据<br>3.避免不必要的partition操作</p>
-<p><img src="/images/CourseraSpark/6DAC13607B04971B7F9CCA92439F2487.png" alt="Screen Shot 2017-10-02 at 13.34.47.png"></p>
-<h2 id="Tungsten"><a href="#Tungsten" class="headerlink" title="Tungsten"></a>Tungsten</h2><p>Tungsten为Spark优化数据存储和垃圾回收：<br><img src="/images/CourseraSpark/8717EFDDE4783EC937F39B9EE8291654.png" alt="Screen Shot 2017-10-02 at 13.38.35.png"><br>1.data encoder<br>通过分析表信息，将数据序列化后打包放进内存，节省空间。<br>2.base on column<br>大多数操作更多的是读写某个列的值，将数据按分列存储，可以加速排序、分组等操作。<br>3.off—heap<br>由Tungsten接管堆，避免JVM过度暂停和收集垃圾。</p>
-<h2 id="Data-Frame的缺点"><a href="#Data-Frame的缺点" class="headerlink" title="Data Frame的缺点"></a>Data Frame的缺点</h2><p>1.SQL操作错误无法在Compile期间检测：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//如果state列不存在，只能得到runtime报错</div><div class="line">listingDF.filter($&quot;state&quot;==&quot;CA&quot;)</div></pre></td></tr></table></figure></p>
-<p>2.存储的数据结构太复杂的话，Tungsten encoder无法为其优化<br>3.非结构化的数据，没法使用Date Frame存储，只能回到RDD</p>
-<h1 id="适用范围"><a href="#适用范围" class="headerlink" title="适用范围"></a>适用范围</h1><p><img src="/images/CourseraSpark/89A3EFC4C5ECB7E6B89BF55E6F506715.png" alt="Screen Shot 2017-10-02 at 14.34.50.png"></p>
-<hr>
-<h4 id="additions"><a href="#additions" class="headerlink" title="additions"></a>additions</h4><p><img src="/images/CourseraSpark/1652E02BFDC41E7EBA272625608B7151.png" alt="Screen Shot 2017-09-27 at 14.26.06.png"></p>
-
-          
+<li>Transform is <strong>lazy</strong><br>RDD的map等操作是lazy的<br><img src="/images/CourseraSpark/3A54DF7ACD01ADD1E78DFF7C7249721F.png" alt="Screen Shot 2017-09-27 at 13.41.34.png">
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/12/CourseraSpark/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Spark 笔记Features over Hadoop latency通过减少disk操作来提升计算效率 fault tolerance只保存数据和函数过程，不保存中间结果  Transform and Action Transform is lazyRDD的map等操作是lazy的 Action is eagerRDD的reduce等操作是eager(立即求值)的    在求值之前，Spark">
+<meta name="description" content="Spark 笔记Features over Hadoop latency通过减少disk操作来提升计算效率 fault tolerance只保存数据和函数过程，不保存中间结果  Transform and Action Transform is lazyRDD的map等操作是lazy的">
 <meta name="keywords" content="Spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Coursera Spark学习笔记">
 <meta property="og:url" content="http://blog.fuyongxing.com/2017/09/12/CourseraSpark/index.html">
 <meta property="og:site_name" content="光阴冢">
-<meta property="og:description" content="Spark 笔记Features over Hadoop latency通过减少disk操作来提升计算效率 fault tolerance只保存数据和函数过程，不保存中间结果  Transform and Action Transform is lazyRDD的map等操作是lazy的 Action is eagerRDD的reduce等操作是eager(立即求值)的    在求值之前，Spark">
+<meta property="og:description" content="Spark 笔记Features over Hadoop latency通过减少disk操作来提升计算效率 fault tolerance只保存数据和函数过程，不保存中间结果  Transform and Action Transform is lazyRDD的map等操作是lazy的">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/CourseraSpark/3A54DF7ACD01ADD1E78DFF7C7249721F.png">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/CourseraSpark/0B07694C63520C7B18FF1972A23A1E68.png">
@@ -107,10 +107,10 @@
 <meta property="og:image" content="http://blog.fuyongxing.com/images/CourseraSpark/8717EFDDE4783EC937F39B9EE8291654.png">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/CourseraSpark/89A3EFC4C5ECB7E6B89BF55E6F506715.png">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/CourseraSpark/1652E02BFDC41E7EBA272625608B7151.png">
-<meta property="og:updated_time" content="2017-10-17T07:21:55.602Z">
+<meta property="og:updated_time" content="2017-10-17T07:50:26.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera Spark学习笔记">
-<meta name="twitter:description" content="Spark 笔记Features over Hadoop latency通过减少disk操作来提升计算效率 fault tolerance只保存数据和函数过程，不保存中间结果  Transform and Action Transform is lazyRDD的map等操作是lazy的 Action is eagerRDD的reduce等操作是eager(立即求值)的    在求值之前，Spark">
+<meta name="twitter:description" content="Spark 笔记Features over Hadoop latency通过减少disk操作来提升计算效率 fault tolerance只保存数据和函数过程，不保存中间结果  Transform and Action Transform is lazyRDD的map等操作是lazy的">
 <meta name="twitter:image" content="http://blog.fuyongxing.com/images/CourseraSpark/3A54DF7ACD01ADD1E78DFF7C7249721F.png">
 
 
@@ -418,7 +418,8 @@
 <li>fault tolerance<br>只保存数据和函数过程，不保存中间结果</li>
 </ul>
 <h2 id="Transform-and-Action"><a href="#Transform-and-Action" class="headerlink" title="Transform and Action"></a>Transform and Action</h2><ul>
-<li>Transform is <strong>lazy</strong><br>RDD的map等操作是lazy的<br><img src="/images/CourseraSpark/3A54DF7ACD01ADD1E78DFF7C7249721F.png" alt="Screen Shot 2017-09-27 at 13.41.34.png"><br><img src="/images/CourseraSpark/0B07694C63520C7B18FF1972A23A1E68.png" alt="Screen Shot 2017-09-27 at 14.11.49.png"></li>
+<li>Transform is <strong>lazy</strong><br>RDD的map等操作是lazy的<br><img src="/images/CourseraSpark/3A54DF7ACD01ADD1E78DFF7C7249721F.png" alt="Screen Shot 2017-09-27 at 13.41.34.png"><a id="more"></a>
+<img src="/images/CourseraSpark/0B07694C63520C7B18FF1972A23A1E68.png" alt="Screen Shot 2017-09-27 at 14.11.49.png"></li>
 <li>Action is <strong>eager</strong><br>RDD的reduce等操作是eager(立即求值)的<br><img src="/images/CourseraSpark/EC15E365E94153D5C1B4DBB2F894A7D4.png" alt="Screen Shot 2017-09-27 at 13.41.52.png"><br><img src="/images/CourseraSpark/06344801422E23C5646ABAA8562F5B00.png" alt="Screen Shot 2017-09-27 at 14.12.02.png"></li>
 </ul>
 <hr>
