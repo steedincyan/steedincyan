@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java/虚拟机(JVM)," />
+  <meta name="keywords" content="Java,(JVM)虚拟机," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError  2. Java虚拟机栈描述的是方法的内存模型：方法执行时创建一个栈帧。  存储局部变量表，操作数栈，动态链接，方法出口等 局部变量表：存放了8种基本类型，对象引用（对象地址或句柄">
-<meta name="keywords" content="Java&#x2F;虚拟机(JVM)">
+<meta name="keywords" content="Java,(JVM)虚拟机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解JVM笔记">
 <meta property="og:url" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/index.html">
@@ -88,16 +88,16 @@
 <meta property="og:description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError  2. Java虚拟机栈描述的是方法的内存模型：方法执行时创建一个栈帧。  存储局部变量表，操作数栈，动态链接，方法出口等 局部变量表：存放了8种基本类型，对象引用（对象地址或句柄">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/Scan%2022%20Jan%202018%20at%208.05%20PM.jpg">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000.jpg">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202.jpg">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17C70815-C45D-416C-8978-2157CADD6223.jpg">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%203.jpg">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-8FCB7B380820-1.png">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-A6D08D2A64AB-1.png">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%201.JPG">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202%201.JPG">
-<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-4FB15011A977-1.png">
-<meta property="og:updated_time" content="2018-03-11T05:36:58.772Z">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17C70815-C45D-416C-8978-2157CADD6223.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%203.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-8FCB7B380820-1.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-A6D08D2A64AB-1.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%201.JPG">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202%201.JPG">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-4FB15011A977-1.png">
+<meta property="og:updated_time" content="2018-03-11T05:54:02.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解JVM笔记">
 <meta name="twitter:description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError  2. Java虚拟机栈描述的是方法的内存模型：方法执行时创建一个栈帧。  存储局部变量表，操作数栈，动态链接，方法出口等 局部变量表：存放了8种基本类型，对象引用（对象地址或句柄">
@@ -478,9 +478,9 @@
 <li>Serial（单线程，新生代）<br>停顿长，适合 <em>客户端</em> 。</li>
 <li>ParNew（多线程，新生代）<br>适合 <em>服务端</em> 。<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/Scan%2022%20Jan%202018%20at%208.05%20PM.jpg" alt=""></li>
 <li>Parallel Scavenge<br>类似ParNew，但是专注垃圾收集的吞吐率，停顿更长。不适合交互任务。<br>可以开启自适应调节策略，省心。</li>
-<li>Serial Old（单线程，老年代）<br>搭配图：<br><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000.jpg" alt=""></li>
-<li>Parallel Old（多线程，老年代）<br>同样专注垃圾收集的吞吐率<br>搭配图：<br><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202.jpg" alt=""></li>
-<li>CMS<br>过程:<br>(1)初始标记。短暂停顿，记录GC Roots能直接关联到的对象。<br>(2)并发标记。长时间并发，追踪GC Roots的下层节点。<br>(3)重新标记。短暂停顿，修正上一步过程中变动的记录。<br>(4)并发清除。长时间并发，清除垃圾。<br><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17C70815-C45D-416C-8978-2157CADD6223.jpg" alt=""><br>缺点:<br>(1)占用CPU资源多<br>(2)并发清除阶段产生新的对象，叫做“浮动垃圾”，占用老年区空间。空间不够则触发”Concurrent Mode Failure“，可以用Serial Old作为备案。<br>(3)标记-清除产生利用碎片空间。但是开启某选项可以触发整理。</li>
+<li>Serial Old（单线程，老年代）<br>搭配图：<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000.jpg" alt=""></li>
+<li>Parallel Old（多线程，老年代）<br>同样专注垃圾收集的吞吐率<br>搭配图：<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202.jpg" alt=""></li>
+<li>CMS<br>过程:<br>(1)初始标记。短暂停顿，记录GC Roots能直接关联到的对象。<br>(2)并发标记。长时间并发，追踪GC Roots的下层节点。<br>(3)重新标记。短暂停顿，修正上一步过程中变动的记录。<br>(4)并发清除。长时间并发，清除垃圾。<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17C70815-C45D-416C-8978-2157CADD6223.jpg" alt=""><br>缺点:<br>(1)占用CPU资源多<br>(2)并发清除阶段产生新的对象，叫做“浮动垃圾”，占用老年区空间。空间不够则触发”Concurrent Mode Failure“，可以用Serial Old作为备案。<br>(3)标记-清除产生利用碎片空间。但是开启某选项可以触发整理。</li>
 <li>G1</li>
 </ol>
 <ul>
@@ -488,7 +488,7 @@
 <li>可预测的停顿：允许指定单位时长的停顿百分比，通过建立时间模型实现。</li>
 <li>将Java堆分成多个等大小Region，跟踪各个Region，分析回收性价比。</li>
 </ul>
-<p><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%203.jpg" alt=""></p>
+<p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%203.jpg" alt=""></p>
 <h2 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h2><ol>
 <li>对象在新生代Eden中分配。空间不够时触发Minor GC，回收新生代。依然不够，旧对象转移到Old。<br>Minor GC: 新生代 中的GC。<br>Major GC/ Full GC: Old中的GC，通常伴随Minor GC。速度比Minor GC慢10倍以上。</li>
 <li>大对象（ <em>长字符串、数组</em>）容易触发GC，且MInor GC复制大对象耗时。<br>可以开启选项使大对象直接进入Old</li>
@@ -505,7 +505,7 @@
 <li>可视化工具jdk自带的jconsole，线程，内存，cpu全方位检测，甚至可以分析死锁</li>
 <li>VisualVM，功能更多，插件也多</li>
 </ol>
-<p><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-8FCB7B380820-1.png" alt=""></p>
+<p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-8FCB7B380820-1.png" alt=""></p>
 <h1 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h1><p><strong>有且只有</strong>5种情况要求<strong>必须</strong>对类进行“初始化”(加载、验证、准备自然需要在此之前开始)：</p>
 <ol>
 <li>遇到new, getstatic, putstatic, 或 invokestatic 这四条字节码时。常见场景是：<ol>
@@ -566,7 +566,7 @@
 <h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><ol>
 <li>Bootstrap ClassLoader 加载<java_home>/lib 的类(虚拟机只认几个名字)</java_home></li>
 <li>Extension ClassLoader加载<java_home>_lib_ext 的类</java_home></li>
-<li>Application <java_home> 加载用户路径 ClassPath 的类<br><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-A6D08D2A64AB-1.png" alt=""></java_home></li>
+<li>Application <java_home> 加载用户路径 ClassPath 的类<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-A6D08D2A64AB-1.png" alt=""></java_home></li>
 </ol>
 <ul>
 <li>双亲委派模型保证了Object 类在各个加载器环境中都相等<br>双亲委派模型的破坏：</li>
@@ -579,7 +579,7 @@
 <li>JIT 编译器(.class==&gt;01)：HotSpot VM 的 C1、C2编译器</li>
 <li>AOT编译器(.java==&gt;01)</li>
 </ul>
-<h3 id="Javac-编译过程"><a href="#Javac-编译过程" class="headerlink" title="Javac 编译过程"></a>Javac 编译过程</h3><p><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%201.JPG" alt=""></p>
+<h3 id="Javac-编译过程"><a href="#Javac-编译过程" class="headerlink" title="Javac 编译过程"></a>Javac 编译过程</h3><p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%201.JPG" alt=""></p>
 <ol>
 <li>解析与填充符号表<ol>
 <li>词法分析： .class ==&gt; Token。”int a=b+2” 解析为6个不可再分的 Token：int, a, =, b, +, 2</li>
@@ -597,7 +597,7 @@
 </li>
 </ol>
 <h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><ol>
-<li>泛型与类型擦除<br>Java 中的泛型只在.java中存在，在.class中被替换成 Raw Type + 强制转型。<br>Map<string, string="">() ==&gt; Map()<br><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202%201.JPG" alt=""><br>但是下面的可以编译成功，因为.class中的方法签名涉及到返回值<br><img src="%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-4FB15011A977-1.png" alt=""></string,></li>
+<li>泛型与类型擦除<br>Java 中的泛型只在.java中存在，在.class中被替换成 Raw Type + 强制转型。<br>Map<string, string="">() ==&gt; Map()<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202%201.JPG" alt=""><br>但是下面的可以编译成功，因为.class中的方法签名涉及到返回值<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-4FB15011A977-1.png" alt=""></string,></li>
 <li>自动拆箱、装箱</li>
 </ol>
 <ul>
@@ -625,7 +625,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java-虚拟机-JVM/" rel="tag"># Java/虚拟机(JVM)</a>
+            <a href="/tags/Java-JVM-虚拟机/" rel="tag"># Java,(JVM)虚拟机</a>
           
         </div>
       
