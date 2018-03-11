@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制  Java并发机制的底层实现原理volitilevolatile是轻量级的synchronized，合理使用的话成本更低，因为没有线程上下文的切换和调度。vola">
+<meta name="description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="&lt;&lt;Java并发编程的艺术&gt;&gt;笔记">
-<meta property="og:url" content="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术笔记/index.html">
+<meta property="og:title" content="Java并发编程的艺术(笔记)">
+<meta property="og:url" content="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术(笔记)/index.html">
 <meta property="og:site_name" content="主页">
-<meta property="og:description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制  Java并发机制的底层实现原理volitilevolatile是轻量级的synchronized，合理使用的话成本更低，因为没有线程上下文的切换和调度。vola">
+<meta property="og:description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/D84E8903-328C-43D7-99FB-98E8804BE963.png">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/5A036EBB-22ED-4478-A0C5-6F601E31DE59.png">
@@ -98,10 +98,10 @@
 <meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/26A3F8D8-F355-4E7A-9523-8EBCAB39EB41.png">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/477C578A-5613-428C-A918-435DA7105454.png">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/20160329124329566.png">
-<meta property="og:updated_time" content="2018-03-11T06:05:07.726Z">
+<meta property="og:updated_time" content="2018-03-11T06:13:29.287Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="&lt;&lt;Java并发编程的艺术&gt;&gt;笔记">
-<meta name="twitter:description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制  Java并发机制的底层实现原理volitilevolatile是轻量级的synchronized，合理使用的话成本更低，因为没有线程上下文的切换和调度。vola">
+<meta name="twitter:title" content="Java并发编程的艺术(笔记)">
+<meta name="twitter:description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制">
 <meta name="twitter:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/D84E8903-328C-43D7-99FB-98E8804BE963.png">
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术笔记/"/>
+  <link rel="canonical" href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术(笔记)/"/>
 
 
 
 
 
-  <title><<Java并发编程的艺术>>笔记 | 主页</title>
+  <title>Java并发编程的艺术(笔记) | 主页</title>
   
 <script>
   window.fbAsyncInit = function() {
@@ -327,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术笔记/">
+    <link itemprop="mainEntityOfPage" href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术(笔记)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FW Yongxing">
@@ -344,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"><<Java并发编程的艺术>>笔记</h1>
+          <h1 class="post-title" itemprop="name headline">Java并发编程的艺术(笔记)</h1>
         
 
         <div class="post-meta">
@@ -375,8 +375,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/01/Java并发编程的艺术笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术笔记/" itemprop="commentCount">0</span> comments
+                <a href="/2017/03/01/Java并发编程的艺术(笔记)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术(笔记)/" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -415,9 +415,9 @@
 <ul>
 <li>避免一个线程获取多个锁</li>
 <li>避免一个锁内占用多个资源</li>
-<li>尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制</li>
+<li>尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制<a id="more"></a>
+<h2 id="Java并发机制的底层实现原理"><a href="#Java并发机制的底层实现原理" class="headerlink" title="Java并发机制的底层实现原理"></a>Java并发机制的底层实现原理</h2><h3 id="volitile"><a href="#volitile" class="headerlink" title="volitile"></a>volitile</h3>volatile是轻量级的synchronized，合理使用的话成本更低，因为没有线程上下文的切换和调度。<br>volatile变量的赋值语句，会触发CPU指令集的lock，lock指令在多核处理器中做两件事：</li>
 </ul>
-<h2 id="Java并发机制的底层实现原理"><a href="#Java并发机制的底层实现原理" class="headerlink" title="Java并发机制的底层实现原理"></a>Java并发机制的底层实现原理</h2><h3 id="volitile"><a href="#volitile" class="headerlink" title="volitile"></a>volitile</h3><p>volatile是轻量级的synchronized，合理使用的话成本更低，因为没有线程上下文的切换和调度。<br>volatile变量的赋值语句，会触发CPU指令集的lock，lock指令在多核处理器中做两件事：</p>
 <ol>
 <li>将当前处理器缓存行的数据写回到内存</li>
 <li>这个写回内存的操作会使其他CPU核缓存了该内存地址的数据失效</li>
@@ -563,8 +563,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/20/深入理解JVM笔记/" rel="prev" title="深入理解JVM笔记">
-                深入理解JVM笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/20/深入理解JVM(笔记)/" rel="prev" title="深入理解JVM(笔记)">
+                深入理解JVM(笔记) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -596,7 +596,7 @@
   
     <div class="comments" id="comments">
       <div class="fb-comments"
-           data-href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术笔记/"
+           data-href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术(笔记)/"
            data-numposts="10"
            data-width="100%"
            data-colorscheme="light">
