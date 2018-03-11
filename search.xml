@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[.profile, .bash_profile, .bashrc 的区别]]></title>
+    <title><![CDATA[profile, bash_profile和bashrc 的区别]]></title>
     <url>%2F2018%2F02%2F27%2Fprofile-bash-profile-bashrc-%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
-    <content type="text"><![CDATA[profile, bash_profile和bashrc 的区别 通过命令行登录系统时，login shell读取.profile。 特别的，BASH的login shell优先读取.bash_profile，找不到.bash_profile时才读取.profile。 通过输入命令(如bash命令)而非登录方式启动shell时()，读取.bashrc ~/.profile is the place to put stuff that applies to your whole session, such as programs that you want to start when you log in (but not graphical programs, they go into a different file), and environment variable definitions. ~/.bashrc is the place to put stuff that applies only to bash itself, such as alias and function definitions, shell options, and prompt settings. (You could also put key bindings there, but for bash they normally go into ~/.inputrc)]]></content>
+    <content type="text"><![CDATA[通过命令行登录系统时，login shell读取.profile。 特别的，BASH的login shell优先读取.bash_profile，找不到.bash_profile时才读取.profile。 通过输入命令(如bash命令)而非登录方式启动shell时()，读取.bashrc ~/.profile is the place to put stuff that applies to your whole session, such as programs that you want to start when you log in (but not graphical programs, they go into a different file), and environment variable definitions. ~/.bashrc is the place to put stuff that applies only to bash itself, such as alias and function definitions, shell options, and prompt settings. (You could also put key bindings there, but for bash they normally go into ~/.inputrc)]]></content>
       <tags>
         <tag>Linux</tag>
       </tags>
