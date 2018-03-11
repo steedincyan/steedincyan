@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java/虚拟机(JVM)," />
 
 
 
@@ -79,13 +79,29 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="主页">
-<meta property="og:url" content="http://blog.fuyongxing.com/index.html">
+<meta name="description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError  2. Java虚拟机栈描述的是方法的内存模型：方法执行时创建一个栈帧。  存储局部变量表，操作数栈，动态链接，方法出口等 局部变量表：存放了8种基本类型，对象引用（对象地址或句柄">
+<meta name="keywords" content="Java&#x2F;虚拟机(JVM)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JVM笔记">
+<meta property="og:url" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/index.html">
 <meta property="og:site_name" content="主页">
+<meta property="og:description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError  2. Java虚拟机栈描述的是方法的内存模型：方法执行时创建一个栈帧。  存储局部变量表，操作数栈，动态链接，方法出口等 局部变量表：存放了8种基本类型，对象引用（对象地址或句柄">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/Scan%2022%20Jan%202018%20at%208.05%20PM.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17C70815-C45D-416C-8978-2157CADD6223.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%203.jpg">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-8FCB7B380820-1.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-A6D08D2A64AB-1.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%201.JPG">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202%201.JPG">
+<meta property="og:image" content="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-4FB15011A977-1.png">
+<meta property="og:updated_time" content="2018-03-11T05:36:58.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="主页">
+<meta name="twitter:title" content="深入理解JVM笔记">
+<meta name="twitter:description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError  2. Java虚拟机栈描述的是方法的内存模型：方法执行时创建一个栈帧。  存储局部变量表，操作数栈，动态链接，方法出口等 局部变量表：存放了8种基本类型，对象引用（对象地址或句柄">
+<meta name="twitter:image" content="http://blog.fuyongxing.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/Scan%2022%20Jan%202018%20at%208.05%20PM.jpg">
 
 
 
@@ -115,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.fuyongxing.com/"/>
+  <link rel="canonical" href="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/"/>
 
 
 
 
 
-  <title>主页</title>
+  <title>深入理解JVM笔记 | 主页</title>
   
 <script>
   window.fbAsyncInit = function() {
@@ -158,8 +174,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -296,294 +311,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.fuyongxing.com/2017/10/03/Java多线程笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FW Yongxing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/03/Java多线程笔记/" itemprop="url">Java多线程笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-03T23:56:59+08:00">
-                2017-10-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/03/Java多线程笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://blog.fuyongxing.com/2017/10/03/Java多线程笔记/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="调试线程化的程序"><a href="#调试线程化的程序" class="headerlink" title="调试线程化的程序"></a>调试线程化的程序</h3><p>线程问题主要来自四个方面：</p>
-<ol>
-<li><p>死锁</p>
-</li>
-<li><p>活锁<br>当一个线程忙于接受新任务以致它永远没有机会完成任何任务时</p>
-</li>
-<li><p>内存损坏。<br>使用 synchronized 关键字，则完全可以避免内存错误</p>
-</li>
-<li><p>资源耗尽。<br>如果线程数相当大，或者某个资源的侯选线程数远远超过了可用的资源数，则最好使用 资源池。</p>
-</li>
-</ol>
-<ul>
-<li>优先级不可靠。<br>使用yield（）来降低优先级更可靠。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/03/Java多线程笔记/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.fuyongxing.com/2017/09/12/CourseraSpark/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FW Yongxing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/12/CourseraSpark/" itemprop="url">Coursera Spark学习笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-12T10:54:09+08:00">
-                2017-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/12/CourseraSpark/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://blog.fuyongxing.com/2017/09/12/CourseraSpark/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Spark-笔记"><a href="#Spark-笔记" class="headerlink" title="Spark 笔记"></a>Spark 笔记</h1><h2 id="Features-over-Hadoop"><a href="#Features-over-Hadoop" class="headerlink" title="Features over Hadoop"></a>Features over Hadoop</h2><ul>
-<li>latency<br>通过减少disk操作来提升计算效率</li>
-<li>fault tolerance<br>只保存数据和函数过程，不保存中间结果</li>
-</ul>
-<h2 id="Transform-and-Action"><a href="#Transform-and-Action" class="headerlink" title="Transform and Action"></a>Transform and Action</h2><ul>
-<li>Transform is <strong>lazy</strong><br>RDD的map等操作是lazy的<br><img src="/images/CourseraSpark/3A54DF7ACD01ADD1E78DFF7C7249721F.png" alt="Screen Shot 2017-09-27 at 13.41.34.png">
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/12/CourseraSpark/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -613,9 +343,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/20/深入理解JVM笔记/" itemprop="url">深入理解JVM笔记</a></h1>
+          <h1 class="post-title" itemprop="name headline">深入理解JVM笔记</h1>
         
 
         <div class="post-meta">
@@ -675,9 +403,7 @@
       
 
       
-        
-          
-            <h1 id="内存区域与内存溢出异常"><a href="#内存区域与内存溢出异常" class="headerlink" title="内存区域与内存溢出异常"></a>内存区域与内存溢出异常</h1><h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><h3 id="1-程序计数器"><a href="#1-程序计数器" class="headerlink" title="1. 程序计数器"></a>1. 程序计数器</h3><p>即线程的下一条指令的指示器</p>
+        <h1 id="内存区域与内存溢出异常"><a href="#内存区域与内存溢出异常" class="headerlink" title="内存区域与内存溢出异常"></a>内存区域与内存溢出异常</h1><h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><h3 id="1-程序计数器"><a href="#1-程序计数器" class="headerlink" title="1. 程序计数器"></a>1. 程序计数器</h3><p>即线程的下一条指令的指示器</p>
 <ul>
 <li>是<strong>线程私有</strong>的：每条线程都有一个独立的程序计数器，独立存储。</li>
 <li>如果执行Native方法，计数器为空</li>
@@ -883,8 +609,6 @@
 </ol>
 <p>代码质量检查工具：CheckStyle, FindBugs, Klocwork</p>
 
-          
-        
       
     </div>
     
@@ -899,14 +623,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Java-虚拟机-JVM/" rel="tag"># Java/虚拟机(JVM)</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/12/CourseraSpark/" rel="prev" title="Coursera Spark学习笔记">
+                Coursera Spark学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -916,10 +662,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -927,6 +674,17 @@
 
 
           
+  
+    <div class="comments" id="comments">
+      <div class="fb-comments"
+           data-href="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/"
+           data-numposts="10"
+           data-width="100%"
+           data-colorscheme="light">
+      </div>
+    </div>
+  
+
 
         </div>
         
@@ -947,8 +705,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1025,6 +792,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内存区域与内存溢出异常"><span class="nav-number">1.</span> <span class="nav-text">内存区域与内存溢出异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时数据区域"><span class="nav-number">1.1.</span> <span class="nav-text">运行时数据区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-程序计数器"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 程序计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Java虚拟机栈"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. Java虚拟机栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-本地方法栈"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 本地方法栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Java堆"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. Java堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-方法区"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 方法区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-直接内存"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. 直接内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机中的对象"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟机中的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的内存布局"><span class="nav-number">1.2.1.</span> <span class="nav-text">对象的内存布局</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集器与内存分配策略"><span class="nav-number">2.</span> <span class="nav-text">垃圾收集器与内存分配策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象是否死亡"><span class="nav-number">2.1.</span> <span class="nav-text">对象是否死亡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型"><span class="nav-number">2.1.1.</span> <span class="nav-text">引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize-方法"><span class="nav-number">2.1.2.</span> <span class="nav-text">finalize()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法区的回收"><span class="nav-number">2.1.3.</span> <span class="nav-text">方法区的回收</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HostSpot寻找垃圾-可达性分析"><span class="nav-number">2.2.</span> <span class="nav-text">HostSpot寻找垃圾-可达性分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">2.3.</span> <span class="nav-text">垃圾收集器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配与回收策略"><span class="nav-number">2.4.</span> <span class="nav-text">内存分配与回收策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机工具"><span class="nav-number">3.</span> <span class="nav-text">虚拟机工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类加载机制"><span class="nav-number">4.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载过程"><span class="nav-number">4.1.</span> <span class="nav-text">类加载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-加载"><span class="nav-number">4.1.1.</span> <span class="nav-text">1. 加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-验证"><span class="nav-number">4.1.2.</span> <span class="nav-text">2.验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-准备"><span class="nav-number">4.1.3.</span> <span class="nav-text">3. 准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-解析"><span class="nav-number">4.1.4.</span> <span class="nav-text">4. 解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-初始化"><span class="nav-number">4.1.5.</span> <span class="nav-text">5. 初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器"><span class="nav-number">4.2.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双亲委派模型"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委派模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#早期-编译器-优化"><span class="nav-number">5.</span> <span class="nav-text">早期(编译器)优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器种类"><span class="nav-number">5.0.1.</span> <span class="nav-text">编译器种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Javac-编译过程"><span class="nav-number">5.0.2.</span> <span class="nav-text">Javac 编译过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法糖"><span class="nav-number">5.0.3.</span> <span class="nav-text">语法糖</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1151,6 +934,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
