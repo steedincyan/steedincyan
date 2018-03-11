@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -79,13 +79,30 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="主页">
-<meta property="og:url" content="http://blog.fuyongxing.com/index.html">
+<meta name="description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制  Java并发机制的底层实现原理volitilevolatile是轻量级的synchronized，合理使用的话成本更低，因为没有线程上下文的切换和调度。vola">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&lt;&lt;Java并发编程的艺术&gt;&gt;笔记">
+<meta property="og:url" content="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术笔记/index.html">
 <meta property="og:site_name" content="主页">
+<meta property="og:description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制  Java并发机制的底层实现原理volitilevolatile是轻量级的synchronized，合理使用的话成本更低，因为没有线程上下文的切换和调度。vola">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/D84E8903-328C-43D7-99FB-98E8804BE963.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/5A036EBB-22ED-4478-A0C5-6F601E31DE59.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/0A02CF9E-F0AA-4A57-BDB9-BC83E41F7AF9.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/Screen%20Shot%202018-03-03%20at%2013.32.15.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/F697D0D7-3449-4C13-B106-1C0DFAF31AF8.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/78C854EB-FF90-4918-871F-E260AE694B5E.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/784B9631-45A0-426C-895D-AFB5EDD62EC7.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/8D4394D8-95ED-4E0C-BCAE-976CCBACFD8E.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/26A3F8D8-F355-4E7A-9523-8EBCAB39EB41.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/477C578A-5613-428C-A918-435DA7105454.png">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/20160329124329566.png">
+<meta property="og:updated_time" content="2018-03-11T06:05:07.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="主页">
+<meta name="twitter:title" content="&lt;&lt;Java并发编程的艺术&gt;&gt;笔记">
+<meta name="twitter:description" content="并发编程的挑战减少上下文切换：  无锁并发编程 CAS(如Atomic类型) 使用最少线程 协程  避免死锁：  避免一个线程获取多个锁 避免一个锁内占用多个资源 尝试使用定时锁，lock.tryLock(timeout)代替内部锁机制  Java并发机制的底层实现原理volitilevolatile是轻量级的synchronized，合理使用的话成本更低，因为没有线程上下文的切换和调度。vola">
+<meta name="twitter:image" content="http://blog.fuyongxing.com/images/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/D84E8903-328C-43D7-99FB-98E8804BE963.png">
 
 
 
@@ -115,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.fuyongxing.com/"/>
+  <link rel="canonical" href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术笔记/"/>
 
 
 
 
 
-  <title>主页</title>
+  <title><<Java并发编程的艺术>>笔记 | 主页</title>
   
 <script>
   window.fbAsyncInit = function() {
@@ -158,8 +175,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -296,482 +312,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.fuyongxing.com/2017/09/12/CourseraSpark/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FW Yongxing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/12/CourseraSpark/" itemprop="url">Coursera Spark学习笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-12T10:54:09+08:00">
-                2017-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/12/CourseraSpark/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://blog.fuyongxing.com/2017/09/12/CourseraSpark/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Features-over-Hadoop"><a href="#Features-over-Hadoop" class="headerlink" title="Features over Hadoop"></a>Features over Hadoop</h2><ul>
-<li>latency<br>通过减少disk操作来提升计算效率</li>
-<li>fault tolerance<br>只保存数据和函数过程，不保存中间结果</li>
-</ul>
-<h2 id="Transform-and-Action"><a href="#Transform-and-Action" class="headerlink" title="Transform and Action"></a>Transform and Action</h2><ul>
-<li>Transform is <strong>lazy</strong><br>RDD的map等操作是lazy的<br><img src="/images/CourseraSpark/3A54DF7ACD01ADD1E78DFF7C7249721F.png" alt="Screen Shot 2017-09-27 at 13.41.34.png">
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/12/CourseraSpark/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FW Yongxing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/20/深入理解JVM笔记/" itemprop="url">深入理解JVM笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-20T13:34:36+08:00">
-                2017-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/20/深入理解JVM笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://blog.fuyongxing.com/2017/05/20/深入理解JVM笔记/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="内存区域与内存溢出异常"><a href="#内存区域与内存溢出异常" class="headerlink" title="内存区域与内存溢出异常"></a>内存区域与内存溢出异常</h1><h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><h3 id="1-程序计数器"><a href="#1-程序计数器" class="headerlink" title="1. 程序计数器"></a>1. 程序计数器</h3><p>即线程的下一条指令的指示器</p>
-<ul>
-<li>是<strong>线程私有</strong>的：每条线程都有一个独立的程序计数器，独立存储。</li>
-<li>如果执行Native方法，计数器为空</li>
-<li>不抛出OutOfMemoryError</li>
-</ul>
-<h3 id="2-Java虚拟机栈"><a href="#2-Java虚拟机栈" class="headerlink" title="2. Java虚拟机栈"></a>2. Java虚拟机栈</h3><p>描述的是<strong>方法</strong>的内存模型：方法执行时创建一个栈帧。</p>
-<ul>
-<li>存储<code>局部变量表</code>，<code>操作数栈</code>，<code>动态链接</code>，<code>方法出口</code>等<blockquote>
-<p>局部变量表：存放了8种基本类型，对象引用（对象地址或句柄），返回地址等  </p>
-</blockquote>
-</li>
-<li>也是<strong>线程私有</strong>的</li>
-<li><em>生命周期</em>与线程相同</li>
-<li>线程申请栈大于虚拟机允许：抛出StackOverFlowError；动态扩展大于系统允许：抛出OutOfMemoryError；申请新线程允许：抛出OutOfMemoryError；</li>
-</ul>
-<h3 id="3-本地方法栈"><a href="#3-本地方法栈" class="headerlink" title="3. 本地方法栈"></a>3. 本地方法栈</h3><p>为Native方法调用服务，实现方式非常自由。</p>
-<ul>
-<li>也是<strong>线程私有</strong>的</li>
-<li>抛出的异常同上</li>
-</ul>
-<h3 id="4-Java堆"><a href="#4-Java堆" class="headerlink" title="4. Java堆"></a>4. Java堆</h3><p>原则上所有对象实例，数组和静态域都在此分配。由于JIT编译器与逃逸分析技术， <em>栈上分配</em> 与 <em>标量替换</em> 会破坏这个原则。</p>
-<ul>
-<li>是<strong>线程共享</strong>的</li>
-<li>抛出OutOfMemoryError</li>
-</ul>
-<h3 id="5-方法区"><a href="#5-方法区" class="headerlink" title="5. 方法区"></a>5. 方法区</h3><p>存储 <em>已被虚拟机加载</em> 的类信息、常量池、静态变量、即时编译器编译的代码等</p>
-<ul>
-<li>是<strong>线程共享</strong>的</li>
-<li>不等价于“永久代”。过去HotSpot用“永久代”实现方法区。</li>
-<li>抛出OutOfMemoryError<blockquote>
-<p><strong>运行时常量池</strong>属于方法区。<br>存放被加载类的常量池、运行期间新的常量（<code>String</code>的<code>intern()</code>方法）  </p>
-</blockquote>
-</li>
-</ul>
-<h3 id="6-直接内存"><a href="#6-直接内存" class="headerlink" title="6. 直接内存"></a>6. 直接内存</h3><p>不属于 <em>运行时数据区域</em> ，也不属于Java虚拟机规范。</p>
-<ul>
-<li>NIO使用的Channel和Buffer方式，会调用Native函数直接在操作系统中开辟内存空间。Java堆中的DirectByteBuffer对象持有此空间地址。</li>
-<li>抛出OutOfMemoryError</li>
-</ul>
-<h2 id="虚拟机中的对象"><a href="#虚拟机中的对象" class="headerlink" title="虚拟机中的对象"></a>虚拟机中的对象</h2><p>对象创建过程：初始化new一个对象时，虚拟机从方法区的常量池查找类符号，将此类加载、解析和初始化（如果是第一次）。然后分配内存，归零，执行init初始化。</p>
-<h3 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h3><p>在HotSpot中，对象有3部分：</p>
-<ol>
-<li>对象头<br>分为两块。<br>(a) 哈希码，GC分代年龄，状态锁标志，线程持有的锁，偏向线程ID，偏向时间戳等。(32或者64bit)<br>(b) 类型指针/数组长度：指向对象的类数据（并非查找类的唯一方法）。</li>
-<li>实例数据排列方式<br>父类的基本类型，指针；<br>子类的基本类型，指针；<br>相同宽度的放在一起。<br><em>实际上CompactFields默认开启，所以子类窄变量可以插入父类变量缝隙。</em></li>
-<li>填充。实例数据是8byte的整数倍。</li>
-</ol>
-<h1 id="垃圾收集器与内存分配策略"><a href="#垃圾收集器与内存分配策略" class="headerlink" title="垃圾收集器与内存分配策略"></a>垃圾收集器与内存分配策略</h1><h2 id="对象是否死亡"><a href="#对象是否死亡" class="headerlink" title="对象是否死亡"></a>对象是否死亡</h2><p>可作为GC Roots的对象有：</p>
-<ol>
-<li>虚拟机栈（栈帧中的<strong>本地变量表</strong>）引用的对象</li>
-<li>方法区中类的<strong>静态属性</strong>引用的对象</li>
-<li>方法区中<strong>常量</strong>引用的对象</li>
-<li>本地方法栈中JNI（<strong>Native方法</strong>）引用的对象</li>
-</ol>
-<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><ol>
-<li>强引用，永不回收<br>如“Object o = new Object()“</li>
-<li>软引用。内存不够时，系统回收其他对象；如果还是不够，就开始回收软引用。<br>用SoftReference类实现</li>
-<li>弱引用。撑不过任何一次垃圾回收。<br>用WeakReference实现</li>
-<li>虚引用。除了在垃圾回收时收到一个通知，没有任何作用。<br>用PhantomReference实现</li>
-</ol>
-<h3 id="finalize-方法"><a href="#finalize-方法" class="headerlink" title="finalize()方法"></a>finalize()方法</h3><p>实现了finalize()的对象，会被移入F-Queue（只会被移入一次），被Finalizer线程执行，不保证完整成功。<br>finalize()通过使其他变量引用自己，可以将自己从队列中拯救。但是再也没有进入F-Queue的机会了。<br>finalize()是个傻到爆炸的设计，不能保证任何功能的实现。不允许使用这货。</p>
-<h3 id="方法区的回收"><a href="#方法区的回收" class="headerlink" title="方法区的回收"></a>方法区的回收</h3><p>主要回收两部分内容</p>
-<ol>
-<li>常量。没有用被其他对象引用/使用的常量如“abc”。</li>
-<li>类。满足以下条件，仅仅是可以回收，而不是必然被回收。<br>(a) 所有实例被回收，即堆中无实例<br>(b) 加载该类的ClassLoader已被回收<br>(c) 对应的java.lang.Class对象没有被引用</li>
-</ol>
-<h2 id="HostSpot寻找垃圾-可达性分析"><a href="#HostSpot寻找垃圾-可达性分析" class="headerlink" title="HostSpot寻找垃圾-可达性分析"></a>HostSpot寻找垃圾-可达性分析</h2><ol>
-<li>枚举根节点<br>类加载完成后，HotSpot根据对象实例中引用的偏移量、编译过程中栈和寄存器中引用的位置，直接建立引用链（OopMap数据结构）。</li>
-<li>安全点<br>(a) 程序“长时间执行”点，如方法调用、循环跳转、异常跳转<br>(b) 创建对象/需要分配内存 的地方<br>线程主动轮询GC设置的安全点标志，并在安全点停车，为GC建立引用链提供同步条件。</li>
-<li>安全区域<br>在一段代码中，若引用关系不会变化，它就是安全区域。<br>处于sleep和blocked的线程不响应GC，没法识别/进入安全点。<br>线程进入安全区域后，标识自己进入安全区。GC启动时，就不用管这些线程。</li>
-</ol>
-<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><ol>
-<li>Serial（单线程，新生代）<br>停顿长，适合 <em>客户端</em> 。</li>
-<li>ParNew（多线程，新生代）<br>适合 <em>服务端</em> 。<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/Scan%2022%20Jan%202018%20at%208.05%20PM.jpg" alt=""></li>
-<li>Parallel Scavenge<br>类似ParNew，但是专注垃圾收集的吞吐率，停顿更长。不适合交互任务。<br>可以开启自适应调节策略，省心。</li>
-<li>Serial Old（单线程，老年代）<br>搭配图：<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000.jpg" alt=""></li>
-<li>Parallel Old（多线程，老年代）<br>同样专注垃圾收集的吞吐率<br>搭配图：<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202.jpg" alt=""></li>
-<li>CMS<br>过程:<br>(1)初始标记。短暂停顿，记录GC Roots能直接关联到的对象。<br>(2)并发标记。长时间并发，追踪GC Roots的下层节点。<br>(3)重新标记。短暂停顿，修正上一步过程中变动的记录。<br>(4)并发清除。长时间并发，清除垃圾。<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17C70815-C45D-416C-8978-2157CADD6223.jpg" alt=""><br>缺点:<br>(1)占用CPU资源多<br>(2)并发清除阶段产生新的对象，叫做“浮动垃圾”，占用老年区空间。空间不够则触发”Concurrent Mode Failure“，可以用Serial Old作为备案。<br>(3)标记-清除产生利用碎片空间。但是开启某选项可以触发整理。</li>
-<li>G1</li>
-</ol>
-<ul>
-<li>并行+并发，分代收集，空间整理。</li>
-<li>可预测的停顿：允许指定单位时长的停顿百分比，通过建立时间模型实现。</li>
-<li>将Java堆分成多个等大小Region，跟踪各个Region，分析回收性价比。</li>
-</ul>
-<p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%203.jpg" alt=""></p>
-<h2 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h2><ol>
-<li>对象在新生代Eden中分配。空间不够时触发Minor GC，回收新生代。依然不够，旧对象转移到Old。<br>Minor GC: 新生代 中的GC。<br>Major GC/ Full GC: Old中的GC，通常伴随Minor GC。速度比Minor GC慢10倍以上。</li>
-<li>大对象（ <em>长字符串、数组</em>）容易触发GC，且MInor GC复制大对象耗时。<br>可以开启选项使大对象直接进入Old</li>
-<li>长时间存活的对象进入Old，计算对象Survive次数实现。</li>
-<li>Survivor中一半对象年纪相同，则大于此年纪的直接进入Old</li>
-<li>Old中的最大连续空间能容纳历次GC中从Survior晋升到Old的对象<strong>平均值</strong>，则冒险Minor GC，而不进行Full GC。冒险失败再Full GC。总之尽量避免Full GC。</li>
-</ol>
-<h1 id="虚拟机工具"><a href="#虚拟机工具" class="headerlink" title="虚拟机工具"></a>虚拟机工具</h1><ol>
-<li>jps。java 进程状态查询（类名，路径，参数等）。jps -lv</li>
-<li>jstat。虚拟机信息监视。jstat -gcutil port interval(ms) times</li>
-<li>jinfo。查看调整虚拟机参数。</li>
-<li>jmap。生成堆转出快照。</li>
-<li>jhat。快照分析工具，太粗糙，基本不用。</li>
-<li>可视化工具jdk自带的jconsole，线程，内存，cpu全方位检测，甚至可以分析死锁</li>
-<li>VisualVM，功能更多，插件也多</li>
-</ol>
-<p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-8FCB7B380820-1.png" alt=""></p>
-<h1 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h1><p><strong>有且只有</strong>5种情况要求<strong>必须</strong>对类进行“初始化”(加载、验证、准备自然需要在此之前开始)：</p>
-<ol>
-<li>遇到new, getstatic, putstatic, 或 invokestatic 这四条字节码时。常见场景是：<ol>
-<li>new 关键字实例化对象</li>
-<li>读取/或者设置一个类的静态字段</li>
-<li>调用一个类的静态方法</li>
-</ol>
-</li>
-<li>使用java.lang.reflect包进行反射调用</li>
-<li>初始化一个类前先初始化其父类；没有引用父接口资源，可以直接初始化一个接口</li>
-<li>虚拟机启动时先初始化包含 main() 方法的类</li>
-<li>MethodHandle 实例解析结果与「1.」对应</li>
-</ol>
-<h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><h3 id="1-加载"><a href="#1-加载" class="headerlink" title="1. 加载"></a>1. 加载</h3><p>获取类的二进制流 ==(通过文件格式验证)==&gt; 结构化存入方法区 ==&gt; 生成这个类的 java.lang.Class对象，作为类数据的入口</p>
-<blockquote>
-<p>创建数组时，会将数组标记在类加载器上(基本类型：Bootstrap ClassLoaer，引用类型：对应的类加载器)  </p>
-</blockquote>
-<h3 id="2-验证"><a href="#2-验证" class="headerlink" title="2.验证"></a>2.验证</h3><p><code>-Xverify:none</code>可以用来关闭大部分验证过程</p>
-<ol>
-<li>文件格式验证(Class 文件格式)<br>魔数，主次版本，常量池规范……<br>检测完就存入方法区。</li>
-<li>元数据验证(语义分析)<br>有无父类，实现了接口的方法，字段、方法命名矛盾……</li>
-<li>字节码验证(控制流、数据流分析)<br>指令不可以乱跳，数据不可以随意操作。因为『Halting Problem』，JDK 1.7后不再推导数据流的合法性，而是使用类型检查(检查StackMapTable属性合法)</li>
-<li>符号引用验证(『解析』阶段发生)<br>符号引用的内容是否存在，是否有权限访问……</li>
-</ol>
-<h3 id="3-准备"><a href="#3-准备" class="headerlink" title="3. 准备"></a>3. 准备</h3><p>在方法区内，给类变量(static 变量)分配内存、赋<strong>零值</strong>，给 static final 变量赋<strong>初值</strong></p>
-<h3 id="4-解析"><a href="#4-解析" class="headerlink" title="4. 解析"></a>4. 解析</h3><p>即将符号引用解析为直接引用(指针、偏移量、句柄)</p>
-<blockquote>
-<p>除了<code>invokedynamic</code>指令，虚拟机只解析一次符号引用，并将其缓存  </p>
-<ol>
-<li>类/接口解析</li>
-</ol>
-<ul>
-<li>在当前代码中将符号引用解析C 类/接口：符号引用==(虚拟机查找)==&gt;C 的全限定名==(虚拟机交给)==&gt;当前类的加载器==(加载 C)==&gt;</li>
-<li>如果 C 是引用数组，按上述过程解析引用的类，再生成数组对象</li>
-</ul>
-<ol>
-<li>字段解析</li>
-</ol>
-<ul>
-<li>通过 CONSTANT_Class_info 找到字段所属类/接口C==&gt;找 C 中的匹配==&gt;继续找 C 的接口和父接口的匹配=&gt;找 C的父类树。找到为止。</li>
-<li>多个匹配同时存在于C 和 C 的接口树中，编译会失败</li>
-</ul>
-<ol>
-<li>类方法解析<br>同样的方法找到 C 的符号引用==&gt;C 是接口，抛出异常==&gt;找 C 中的匹配==&gt;找 C 父类树种的匹配==&gt;找接口树中的匹配，找到就抛异常。找到为止。</li>
-<li>接口方法解析<br>C 是类，抛异常==&gt;找 C 中的匹配==&gt;找 C 的父接口树。找到为止。</li>
-</ol>
-</blockquote>
-<h3 id="5-初始化"><a href="#5-初始化" class="headerlink" title="5. 初始化"></a>5. 初始化</h3><p>即执行类构造器<clinit>()方法的过程。</clinit></p>
-<ul>
-<li>编译器按顺序搜集 static 变量赋值动作、static 块，组成<clinit>()。没有则不生成<clinit>()。</clinit></clinit></li>
-<li><clinit>()执行不会触发父类<clinit>()，虚拟机保证已经执行了父类<clinit>()。意味着父类的静态语句执行顺序优先于子类。</clinit></clinit></clinit></li>
-<li><clinit>()只会被一个线程占有，且只执行一次。</clinit></li>
-</ul>
-<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><ul>
-<li>被不同类加载器加载的类，必定不相等</li>
-<li>所有加载器继承自 java.lang.ClassLoader</li>
-</ul>
-<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><ol>
-<li>Bootstrap ClassLoader 加载<java_home>/lib 的类(虚拟机只认几个名字)</java_home></li>
-<li>Extension ClassLoader加载<java_home>_lib_ext 的类</java_home></li>
-<li>Application <java_home> 加载用户路径 ClassPath 的类<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-A6D08D2A64AB-1.png" alt=""></java_home></li>
-</ol>
-<ul>
-<li>双亲委派模型保证了Object 类在各个加载器环境中都相等<br>双亲委派模型的破坏：</li>
-<li>loadClass()方法里是双亲委派逻辑，不应更改。重写findClass()方法来加载自己的类。</li>
-<li>JNDI 通过 java.lang.Thread 的 setContextLoader()实现父加载器调用子加载器。</li>
-<li>OSGi 的加载器是网状结构。</li>
-</ul>
-<h1 id="早期-编译器-优化"><a href="#早期-编译器-优化" class="headerlink" title="早期(编译器)优化"></a>早期(编译器)优化</h1><h3 id="编译器种类"><a href="#编译器种类" class="headerlink" title="编译器种类"></a>编译器种类</h3><ul>
-<li>前端编译器(.java==&gt;.class)：如Javac</li>
-<li>JIT 编译器(.class==&gt;01)：HotSpot VM 的 C1、C2编译器</li>
-<li>AOT编译器(.java==&gt;01)</li>
-</ul>
-<h3 id="Javac-编译过程"><a href="#Javac-编译过程" class="headerlink" title="Javac 编译过程"></a>Javac 编译过程</h3><p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%201.JPG" alt=""></p>
-<ol>
-<li>解析与填充符号表<ol>
-<li>词法分析： .class ==&gt; Token。”int a=b+2” 解析为6个不可再分的 Token：int, a, =, b, +, 2</li>
-<li>语法分析：Token==&gt;语法树(包、类型、修饰符、接口……)。</li>
-<li>填充符号表</li>
-</ol>
-</li>
-<li>插入式注解处理器的注解处理过程<br>注解可以增删改语法树中的任意元素。修改后返回填充符号表步骤。</li>
-<li>语义分析与字节码生成<ol>
-<li>标注检查。常量折叠： int a = 1 + 2 ==&gt; int a = 3</li>
-<li>数据、控制流分析。修饰的局部变量的final，在.class中消失</li>
-<li>解语法糖</li>
-<li>字节码生成</li>
-</ol>
-</li>
-</ol>
-<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><ol>
-<li>泛型与类型擦除<br>Java 中的泛型只在.java中存在，在.class中被替换成 Raw Type + 强制转型。<br>Map<string, string="">() ==&gt; Map()<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202%201.JPG" alt=""><br>但是下面的可以编译成功，因为.class中的方法签名涉及到返回值<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-4FB15011A977-1.png" alt=""></string,></li>
-<li>自动拆箱、装箱</li>
-</ol>
-<ul>
-<li>for( int i : list){} ==&gt; (1) Integer 包装 i；(2) .class中的迭代器</li>
-<li>IntegerA == IntegerB / intA，；只有遇到算数才自动拆箱。</li>
-</ul>
-<ol>
-<li>条件编译<br>根据if 判断中的常量，修剪条件分支</li>
-</ol>
-<p>代码质量检查工具：CheckStyle, FindBugs, Klocwork</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -801,9 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/01/Java并发编程的艺术笔记/" itemprop="url"><<Java并发编程的艺术>>笔记</a></h1>
+          <h1 class="post-title" itemprop="name headline"><<Java并发编程的艺术>>笔记</h1>
         
 
         <div class="post-meta">
@@ -863,9 +404,7 @@
       
 
       
-        
-          
-            <h2 id="并发编程的挑战"><a href="#并发编程的挑战" class="headerlink" title="并发编程的挑战"></a>并发编程的挑战</h2><p>减少上下文切换：</p>
+        <h2 id="并发编程的挑战"><a href="#并发编程的挑战" class="headerlink" title="并发编程的挑战"></a>并发编程的挑战</h2><p>减少上下文切换：</p>
 <ul>
 <li>无锁并发编程</li>
 <li>CAS(如Atomic类型)</li>
@@ -989,8 +528,6 @@
 <li>LinkedBlockingDeque：一个由链表结构组成的双向阻塞队列。<br>双端队列，减少了一半的竞争<br><strong>阻塞队列实现：</strong>基于Condition的 <code>等待/通知(awaite/signal)</code>模式，在notEmpty和notFull两个condition上等待。队列满了之后，阻塞生产者使用<code>notFull.await()</code>，await()实际调用了LockSupport.part(this)。</li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -1005,14 +542,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/20/深入理解JVM笔记/" rel="prev" title="深入理解JVM笔记">
+                深入理解JVM笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -1022,10 +581,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -1033,6 +593,17 @@
 
 
           
+  
+    <div class="comments" id="comments">
+      <div class="fb-comments"
+           data-href="http://blog.fuyongxing.com/2017/03/01/Java并发编程的艺术笔记/"
+           data-numposts="10"
+           data-width="100%"
+           data-colorscheme="light">
+      </div>
+    </div>
+  
+
 
         </div>
         
@@ -1053,8 +624,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1131,6 +711,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程的挑战"><span class="nav-number">1.</span> <span class="nav-text">并发编程的挑战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java并发机制的底层实现原理"><span class="nav-number">2.</span> <span class="nav-text">Java并发机制的底层实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volitile"><span class="nav-number">2.1.</span> <span class="nav-text">volitile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized"><span class="nav-number">2.2.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子操作"><span class="nav-number">2.3.</span> <span class="nav-text">原子操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内存模型"><span class="nav-number">3.</span> <span class="nav-text">Java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile底层原理"><span class="nav-number">3.1.</span> <span class="nav-text">volatile底层原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁的底层原理"><span class="nav-number">3.2.</span> <span class="nav-text">锁的底层原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#concurrent包的实现"><span class="nav-number">3.3.</span> <span class="nav-text">concurrent包的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final域额重排序规则"><span class="nav-number">3.4.</span> <span class="nav-text">final域额重排序规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#happens-before规则"><span class="nav-number">3.5.</span> <span class="nav-text">happens-before规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全的延迟初始化"><span class="nav-number">3.6.</span> <span class="nav-text">线程安全的延迟初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发基础"><span class="nav-number">4.</span> <span class="nav-text">并发基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程间通信"><span class="nav-number">4.1.</span> <span class="nav-text">线程间通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUC"><span class="nav-number">5.</span> <span class="nav-text">JUC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Condition"><span class="nav-number">5.1.</span> <span class="nav-text">Condition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">5.2.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentLinkedQueue"><span class="nav-number">5.3.</span> <span class="nav-text">ConcurrentLinkedQueue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞队列"><span class="nav-number">5.4.</span> <span class="nav-text">阻塞队列</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1257,6 +853,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
