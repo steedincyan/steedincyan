@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next pisces use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -75,7 +75,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '6.0.5',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -110,8 +110,8 @@
 <meta property="og:site_name" content="主页">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://blog.fuyongxing.com/images/进程间通信/Screen%20Shot%202018-03-02%20at%2002.03.29.png">
-<meta property="og:image" content="http://blog.fuyongxing.com/images/进程间通信(IPC">
-<meta property="og:updated_time" content="2018-03-11T06:31:06.481Z">
+<meta property="og:image" content="http://blog.fuyongxing.com/images/进程间通信/Screen%20Shot%202018-03-02%20at%2002.05.05.jpg">
+<meta property="og:updated_time" content="2018-03-11T07:37:09.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程间通信(IPC)">
 <meta name="twitter:image" content="http://blog.fuyongxing.com/images/进程间通信/Screen%20Shot%202018-03-02%20at%2002.03.29.png">
@@ -237,15 +237,15 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
         </li>
       
         
@@ -255,9 +255,9 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
         </li>
       
 
@@ -368,11 +368,11 @@
 
       
         <p><img src="/images/进程间通信/Screen%20Shot%202018-03-02%20at%2002.03.29.png" alt=""><br><a id="more"></a></p>
-<h3 id="各种通信方式的比较和优缺点"><a href="#各种通信方式的比较和优缺点" class="headerlink" title="各种通信方式的比较和优缺点"></a>各种通信方式的比较和优缺点</h3><p><img src="/images/进程间通信(IPC" alt="">/Screen%20Shot%202018-03-02%20at%2002.05.05.jpg)</p>
+<h3 id="各种通信方式的比较和优缺点"><a href="#各种通信方式的比较和优缺点" class="headerlink" title="各种通信方式的比较和优缺点"></a>各种通信方式的比较和优缺点</h3><p><img src="/images/进程间通信/Screen%20Shot%202018-03-02%20at%2002.05.05.jpg" alt=""></p>
 <ul>
 <li><strong>管道</strong>：速度慢，容量有限，只有父子进程能通讯</li>
 <li><strong>FIFO</strong>：任何进程间都能通讯，但速度慢</li>
-<li><strong>消息队列</strong>：容量受到系统限制，且要注意第一次读的时候，要考虑上一次没有读完数据的问题</li>
+<li><strong>消息队列</strong>：容w量受到系统限制，且要注意第一次读的时候，要考虑上一次没有读完数据的问题</li>
 <li><strong>信号/信号量</strong>：不能传递复杂消息，只能用来同步</li>
 <li><strong>共享内存区</strong>：能够很容易控制容量，速度快，但要保持同步，比如一个进程在写的时候，另一个进程要注意读写的问题，相当于线程中的线程安全，当然，共享内存区同样可以用作线程间通讯，不过没这个必要，线程间本来就已经共享了同一进程内的一块内存</li>
 </ul>
@@ -619,7 +619,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.0.5</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.5</div>
 
 
 
@@ -708,6 +708,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.5"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.5"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.5"></script>

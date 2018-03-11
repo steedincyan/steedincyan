@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next pisces use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -75,7 +75,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '6.0.5',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -103,18 +103,18 @@
   <meta name="keywords" content="Linux," />
 
 
-<meta name="description" content=".profile, .bash_profile, .bashrc 的区别#技术/linux  通过命令行登录系统时，login shell读取.profile。 特别的，BASH的login shell优先读取.bash_profile，找不到.bash_profile时才读取.profile。   通过输入命令(如bash命令)而非登录方式启动shell时()，读取.bashrc">
+<meta name="description" content="profile, bash_profile和bashrc 的区别 通过命令行登录系统时，login shell读取.profile。 特别的，BASH的login shell优先读取.bash_profile，找不到.bash_profile时才读取.profile。   通过输入命令(如bash命令)而非登录方式启动shell时()，读取.bashrc">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content=".profile, .bash_profile, .bashrc 的区别">
 <meta property="og:url" content="http://blog.fuyongxing.com/2018/02/27/profile-bash-profile-bashrc-的区别/index.html">
 <meta property="og:site_name" content="主页">
-<meta property="og:description" content=".profile, .bash_profile, .bashrc 的区别#技术/linux  通过命令行登录系统时，login shell读取.profile。 特别的，BASH的login shell优先读取.bash_profile，找不到.bash_profile时才读取.profile。   通过输入命令(如bash命令)而非登录方式启动shell时()，读取.bashrc">
+<meta property="og:description" content="profile, bash_profile和bashrc 的区别 通过命令行登录系统时，login shell读取.profile。 特别的，BASH的login shell优先读取.bash_profile，找不到.bash_profile时才读取.profile。   通过输入命令(如bash命令)而非登录方式启动shell时()，读取.bashrc">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-11T06:29:42.621Z">
+<meta property="og:updated_time" content="2018-03-11T07:37:09.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=".profile, .bash_profile, .bashrc 的区别">
-<meta name="twitter:description" content=".profile, .bash_profile, .bashrc 的区别#技术/linux  通过命令行登录系统时，login shell读取.profile。 特别的，BASH的login shell优先读取.bash_profile，找不到.bash_profile时才读取.profile。   通过输入命令(如bash命令)而非登录方式启动shell时()，读取.bashrc">
+<meta name="twitter:description" content="profile, bash_profile和bashrc 的区别 通过命令行登录系统时，login shell读取.profile。 特别的，BASH的login shell优先读取.bash_profile，找不到.bash_profile时才读取.profile。   通过输入命令(如bash命令)而非登录方式启动shell时()，读取.bashrc">
 
 
 
@@ -237,15 +237,15 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
         </li>
       
         
@@ -255,9 +255,9 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
         </li>
       
 
@@ -367,8 +367,7 @@
       
 
       
-        <h1 id="profile-bash-profile-bashrc-的区别"><a href="#profile-bash-profile-bashrc-的区别" class="headerlink" title=".profile, .bash_profile, .bashrc 的区别"></a>.profile, .bash_profile, .bashrc 的区别</h1><p>#技术/linux</p>
-<ul>
+        <h1 id="profile-bash-profile和bashrc-的区别"><a href="#profile-bash-profile和bashrc-的区别" class="headerlink" title="profile, bash_profile和bashrc 的区别"></a>profile, bash_profile和bashrc 的区别</h1><ul>
 <li>通过命令行登录系统时，login shell读取<code>.profile</code>。<blockquote>
 <p>特别的，BASH的login shell优先读取<code>.bash_profile</code>，找不到<code>.bash_profile</code>时才读取<code>.profile</code>。</p>
 </blockquote>
@@ -574,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#profile-bash-profile-bashrc-的区别"><span class="nav-number">1.</span> <span class="nav-text">.profile, .bash_profile, .bashrc 的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#profile-bash-profile和bashrc-的区别"><span class="nav-number">1.</span> <span class="nav-text">profile, bash_profile和bashrc 的区别</span></a></li></ol></div>
             
 
           </div>
@@ -616,7 +615,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.0.5</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.5</div>
 
 
 
@@ -705,6 +704,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.5"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.5"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.5"></script>
