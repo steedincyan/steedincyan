@@ -23,8 +23,6 @@
     <published>2018-02-27T06:28:15.000Z</published>
     <updated>2018-03-11T07:41:52.000Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>通过命令行登录系统时，login shell读取<code>.profile</code>。<blockquote><p>特别的，BASH的login shell优先读取<code>.bash_profile</code>，找不到<code>.bash_profile</code>时才读取<code>.profile</code>。</p></blockquote></li><li>通过输入命令(如<code>bash</code>命令)而非登录方式启动shell时()，读取<code>.bashrc</code><a id="more"></a></li><li><code>~/.profile</code> is the place to put stuff that applies to your whole session, such as programs that you want to <em>start when you log in</em> (but not graphical programs, they go into a different file), and environment variable definitions.</li><li><code>~/.bashrc</code> is the place to put stuff that applies only to bash itself, such as <em>alias</em> and function definitions, shell options, and prompt settings. (You could also put <em>key bindings</em> there, but for bash they normally go into <code>~/.inputrc</code>)</li></ul>]]></content>
-    
     <summary type="html">
     
       &lt;ul&gt;
