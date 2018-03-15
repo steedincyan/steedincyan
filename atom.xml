@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>SteedInCyan的日记</title>
+  
+  <subtitle>Diary</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://diary.unitedatirsts.com/"/>
+  <updated>2018-03-15T18:21:55.123Z</updated>
+  <id>http://diary.unitedatirsts.com/</id>
+  
+  <author>
+    <name>Steed in Cyan</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>伞</title>
+    <link href="http://diary.unitedatirsts.com/2018/03/16/profile-bash-profile-bashrc-%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://diary.unitedatirsts.com/2018/03/16/profile-bash-profile-bashrc-的区别/</id>
+    <published>2018-03-15T18:21:55.123Z</published>
+    <updated>2018-03-15T18:21:55.123Z</updated>
+    
+    <content type="html"><![CDATA[<span itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><img itemprop="url image" src="/images/pexels-photo-268791.jpeg" class="full-image"><meta itemprop="width" content="auto"><meta itemprop="height" content="auto"></span>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;span itemprop=&quot;image&quot; itemscope=&quot;&quot; itemtype=&quot;http://schema.org/ImageObject&quot;&gt;&lt;img itemprop=&quot;url image&quot; src=&quot;/images/pexels-photo-268791.jpeg
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://diary.unitedatirsts.com/tags/Linux/"/>
+    
+  </entry>
+  
+</feed>
