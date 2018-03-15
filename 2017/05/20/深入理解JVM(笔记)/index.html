@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.5" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.5">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.5">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.5">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.5" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.5',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="Java," />
+
+
+<meta name="description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JVM(笔记)">
+<meta property="og:url" content="http://diary.unitedatirsts.com/2017/05/20/深入理解JVM(笔记)/index.html">
+<meta property="og:site_name" content="SteedInCyan的日记">
+<meta property="og:description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/Scan%2022%20Jan%202018%20at%208.05%20PM.jpg">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000.jpg">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202.jpg">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17C70815-C45D-416C-8978-2157CADD6223.jpg">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%203.jpg">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-8FCB7B380820-1.png">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-A6D08D2A64AB-1.png">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%201.JPG">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202%201.JPG">
+<meta property="og:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-4FB15011A977-1.png">
+<meta property="og:updated_time" content="2018-03-11T07:37:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解JVM(笔记)">
+<meta name="twitter:description" content="内存区域与内存溢出异常运行时数据区域1. 程序计数器即线程的下一条指令的指示器  是线程私有的：每条线程都有一个独立的程序计数器，独立存储。 如果执行Native方法，计数器为空 不抛出OutOfMemoryError">
+<meta name="twitter:image" content="http://diary.unitedatirsts.com/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/Scan%2022%20Jan%202018%20at%208.05%20PM.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="SteedInCyan的日记" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://diary.unitedatirsts.com/2017/05/20/深入理解JVM(笔记)/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>深入理解JVM(笔记) | SteedInCyan的日记</title>
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1954214688135399',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/zh_CN/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SteedInCyan的日记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Diary</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://diary.unitedatirsts.com/2017/05/20/深入理解JVM(笔记)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Steed in Cyan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SteedInCyan的日记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入理解JVM(笔记)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T13:34:36+08:00">2017-05-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="内存区域与内存溢出异常"><a href="#内存区域与内存溢出异常" class="headerlink" title="内存区域与内存溢出异常"></a>内存区域与内存溢出异常</h1><h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><h3 id="1-程序计数器"><a href="#1-程序计数器" class="headerlink" title="1. 程序计数器"></a>1. 程序计数器</h3><p>即线程的下一条指令的指示器</p>
+<ul>
+<li>是<strong>线程私有</strong>的：每条线程都有一个独立的程序计数器，独立存储。</li>
+<li>如果执行Native方法，计数器为空</li>
+<li>不抛出OutOfMemoryError<a id="more"></a>
+<h3 id="2-Java虚拟机栈"><a href="#2-Java虚拟机栈" class="headerlink" title="2. Java虚拟机栈"></a>2. Java虚拟机栈</h3>描述的是<strong>方法</strong>的内存模型：方法执行时创建一个栈帧。</li>
+<li>存储<code>局部变量表</code>，<code>操作数栈</code>，<code>动态链接</code>，<code>方法出口</code>等<blockquote>
+<p>局部变量表：存放了8种基本类型，对象引用（对象地址或句柄），返回地址等  </p>
+</blockquote>
+</li>
+<li>也是<strong>线程私有</strong>的</li>
+<li><em>生命周期</em>与线程相同</li>
+<li>线程申请栈大于虚拟机允许：抛出StackOverFlowError；动态扩展大于系统允许：抛出OutOfMemoryError；申请新线程允许：抛出OutOfMemoryError；</li>
+</ul>
+<h3 id="3-本地方法栈"><a href="#3-本地方法栈" class="headerlink" title="3. 本地方法栈"></a>3. 本地方法栈</h3><p>为Native方法调用服务，实现方式非常自由。</p>
+<ul>
+<li>也是<strong>线程私有</strong>的</li>
+<li>抛出的异常同上</li>
+</ul>
+<h3 id="4-Java堆"><a href="#4-Java堆" class="headerlink" title="4. Java堆"></a>4. Java堆</h3><p>原则上所有对象实例，数组和静态域都在此分配。由于JIT编译器与逃逸分析技术， <em>栈上分配</em> 与 <em>标量替换</em> 会破坏这个原则。</p>
+<ul>
+<li>是<strong>线程共享</strong>的</li>
+<li>抛出OutOfMemoryError</li>
+</ul>
+<h3 id="5-方法区"><a href="#5-方法区" class="headerlink" title="5. 方法区"></a>5. 方法区</h3><p>存储 <em>已被虚拟机加载</em> 的类信息、常量池、静态变量、即时编译器编译的代码等</p>
+<ul>
+<li>是<strong>线程共享</strong>的</li>
+<li>不等价于“永久代”。过去HotSpot用“永久代”实现方法区。</li>
+<li>抛出OutOfMemoryError<blockquote>
+<p><strong>运行时常量池</strong>属于方法区。<br>存放被加载类的常量池、运行期间新的常量（<code>String</code>的<code>intern()</code>方法）  </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="6-直接内存"><a href="#6-直接内存" class="headerlink" title="6. 直接内存"></a>6. 直接内存</h3><p>不属于 <em>运行时数据区域</em> ，也不属于Java虚拟机规范。</p>
+<ul>
+<li>NIO使用的Channel和Buffer方式，会调用Native函数直接在操作系统中开辟内存空间。Java堆中的DirectByteBuffer对象持有此空间地址。</li>
+<li>抛出OutOfMemoryError</li>
+</ul>
+<h2 id="虚拟机中的对象"><a href="#虚拟机中的对象" class="headerlink" title="虚拟机中的对象"></a>虚拟机中的对象</h2><p>对象创建过程：初始化new一个对象时，虚拟机从方法区的常量池查找类符号，将此类加载、解析和初始化（如果是第一次）。然后分配内存，归零，执行init初始化。</p>
+<h3 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h3><p>在HotSpot中，对象有3部分：</p>
+<ol>
+<li>对象头<br>分为两块。<br>(a) 哈希码，GC分代年龄，状态锁标志，线程持有的锁，偏向线程ID，偏向时间戳等。(32或者64bit)<br>(b) 类型指针/数组长度：指向对象的类数据（并非查找类的唯一方法）。</li>
+<li>实例数据排列方式<br>父类的基本类型，指针；<br>子类的基本类型，指针；<br>相同宽度的放在一起。<br><em>实际上CompactFields默认开启，所以子类窄变量可以插入父类变量缝隙。</em></li>
+<li>填充。实例数据是8byte的整数倍。</li>
+</ol>
+<h1 id="垃圾收集器与内存分配策略"><a href="#垃圾收集器与内存分配策略" class="headerlink" title="垃圾收集器与内存分配策略"></a>垃圾收集器与内存分配策略</h1><h2 id="对象是否死亡"><a href="#对象是否死亡" class="headerlink" title="对象是否死亡"></a>对象是否死亡</h2><p>可作为GC Roots的对象有：</p>
+<ol>
+<li>虚拟机栈（栈帧中的<strong>本地变量表</strong>）引用的对象</li>
+<li>方法区中类的<strong>静态属性</strong>引用的对象</li>
+<li>方法区中<strong>常量</strong>引用的对象</li>
+<li>本地方法栈中JNI（<strong>Native方法</strong>）引用的对象</li>
+</ol>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><ol>
+<li>强引用，永不回收<br>如“Object o = new Object()“</li>
+<li>软引用。内存不够时，系统回收其他对象；如果还是不够，就开始回收软引用。<br>用SoftReference类实现</li>
+<li>弱引用。撑不过任何一次垃圾回收。<br>用WeakReference实现</li>
+<li>虚引用。除了在垃圾回收时收到一个通知，没有任何作用。<br>用PhantomReference实现</li>
+</ol>
+<h3 id="finalize-方法"><a href="#finalize-方法" class="headerlink" title="finalize()方法"></a>finalize()方法</h3><p>实现了finalize()的对象，会被移入F-Queue（只会被移入一次），被Finalizer线程执行，不保证完整成功。<br>finalize()通过使其他变量引用自己，可以将自己从队列中拯救。但是再也没有进入F-Queue的机会了。<br>finalize()是个傻到爆炸的设计，不能保证任何功能的实现。不允许使用这货。</p>
+<h3 id="方法区的回收"><a href="#方法区的回收" class="headerlink" title="方法区的回收"></a>方法区的回收</h3><p>主要回收两部分内容</p>
+<ol>
+<li>常量。没有用被其他对象引用/使用的常量如“abc”。</li>
+<li>类。满足以下条件，仅仅是可以回收，而不是必然被回收。<br>(a) 所有实例被回收，即堆中无实例<br>(b) 加载该类的ClassLoader已被回收<br>(c) 对应的java.lang.Class对象没有被引用</li>
+</ol>
+<h2 id="HostSpot寻找垃圾-可达性分析"><a href="#HostSpot寻找垃圾-可达性分析" class="headerlink" title="HostSpot寻找垃圾-可达性分析"></a>HostSpot寻找垃圾-可达性分析</h2><ol>
+<li>枚举根节点<br>类加载完成后，HotSpot根据对象实例中引用的偏移量、编译过程中栈和寄存器中引用的位置，直接建立引用链（OopMap数据结构）。</li>
+<li>安全点<br>(a) 程序“长时间执行”点，如方法调用、循环跳转、异常跳转<br>(b) 创建对象/需要分配内存 的地方<br>线程主动轮询GC设置的安全点标志，并在安全点停车，为GC建立引用链提供同步条件。</li>
+<li>安全区域<br>在一段代码中，若引用关系不会变化，它就是安全区域。<br>处于sleep和blocked的线程不响应GC，没法识别/进入安全点。<br>线程进入安全区域后，标识自己进入安全区。GC启动时，就不用管这些线程。</li>
+</ol>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><ol>
+<li>Serial（单线程，新生代）<br>停顿长，适合 <em>客户端</em> 。</li>
+<li>ParNew（多线程，新生代）<br>适合 <em>服务端</em> 。<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/Scan%2022%20Jan%202018%20at%208.05%20PM.jpg" alt=""></li>
+<li>Parallel Scavenge<br>类似ParNew，但是专注垃圾收集的吞吐率，停顿更长。不适合交互任务。<br>可以开启自适应调节策略，省心。</li>
+<li>Serial Old（单线程，老年代）<br>搭配图：<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000.jpg" alt=""></li>
+<li>Parallel Old（多线程，老年代）<br>同样专注垃圾收集的吞吐率<br>搭配图：<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202.jpg" alt=""></li>
+<li>CMS<br>过程:<br>(1)初始标记。短暂停顿，记录GC Roots能直接关联到的对象。<br>(2)并发标记。长时间并发，追踪GC Roots的下层节点。<br>(3)重新标记。短暂停顿，修正上一步过程中变动的记录。<br>(4)并发清除。长时间并发，清除垃圾。<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17C70815-C45D-416C-8978-2157CADD6223.jpg" alt=""><br>缺点:<br>(1)占用CPU资源多<br>(2)并发清除阶段产生新的对象，叫做“浮动垃圾”，占用老年区空间。空间不够则触发”Concurrent Mode Failure“，可以用Serial Old作为备案。<br>(3)标记-清除产生利用碎片空间。但是开启某选项可以触发整理。</li>
+<li>G1</li>
+</ol>
+<ul>
+<li>并行+并发，分代收集，空间整理。</li>
+<li>可预测的停顿：允许指定单位时长的停顿百分比，通过建立时间模型实现。</li>
+<li>将Java堆分成多个等大小Region，跟踪各个Region，分析回收性价比。</li>
+</ul>
+<p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%203.jpg" alt=""></p>
+<h2 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h2><ol>
+<li>对象在新生代Eden中分配。空间不够时触发Minor GC，回收新生代。依然不够，旧对象转移到Old。<br>Minor GC: 新生代 中的GC。<br>Major GC/ Full GC: Old中的GC，通常伴随Minor GC。速度比Minor GC慢10倍以上。</li>
+<li>大对象（ <em>长字符串、数组</em>）容易触发GC，且MInor GC复制大对象耗时。<br>可以开启选项使大对象直接进入Old</li>
+<li>长时间存活的对象进入Old，计算对象Survive次数实现。</li>
+<li>Survivor中一半对象年纪相同，则大于此年纪的直接进入Old</li>
+<li>Old中的最大连续空间能容纳历次GC中从Survior晋升到Old的对象<strong>平均值</strong>，则冒险Minor GC，而不进行Full GC。冒险失败再Full GC。总之尽量避免Full GC。</li>
+</ol>
+<h1 id="虚拟机工具"><a href="#虚拟机工具" class="headerlink" title="虚拟机工具"></a>虚拟机工具</h1><ol>
+<li>jps。java 进程状态查询（类名，路径，参数等）。jps -lv</li>
+<li>jstat。虚拟机信息监视。jstat -gcutil port interval(ms) times</li>
+<li>jinfo。查看调整虚拟机参数。</li>
+<li>jmap。生成堆转出快照。</li>
+<li>jhat。快照分析工具，太粗糙，基本不用。</li>
+<li>可视化工具jdk自带的jconsole，线程，内存，cpu全方位检测，甚至可以分析死锁</li>
+<li>VisualVM，功能更多，插件也多</li>
+</ol>
+<p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-8FCB7B380820-1.png" alt=""></p>
+<h1 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h1><p><strong>有且只有</strong>5种情况要求<strong>必须</strong>对类进行“初始化”(加载、验证、准备自然需要在此之前开始)：</p>
+<ol>
+<li>遇到new, getstatic, putstatic, 或 invokestatic 这四条字节码时。常见场景是：<ol>
+<li>new 关键字实例化对象</li>
+<li>读取/或者设置一个类的静态字段</li>
+<li>调用一个类的静态方法</li>
+</ol>
+</li>
+<li>使用java.lang.reflect包进行反射调用</li>
+<li>初始化一个类前先初始化其父类；没有引用父接口资源，可以直接初始化一个接口</li>
+<li>虚拟机启动时先初始化包含 main() 方法的类</li>
+<li>MethodHandle 实例解析结果与「1.」对应</li>
+</ol>
+<h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><h3 id="1-加载"><a href="#1-加载" class="headerlink" title="1. 加载"></a>1. 加载</h3><p>获取类的二进制流 ==(通过文件格式验证)==&gt; 结构化存入方法区 ==&gt; 生成这个类的 java.lang.Class对象，作为类数据的入口</p>
+<blockquote>
+<p>创建数组时，会将数组标记在类加载器上(基本类型：Bootstrap ClassLoaer，引用类型：对应的类加载器)  </p>
+</blockquote>
+<h3 id="2-验证"><a href="#2-验证" class="headerlink" title="2.验证"></a>2.验证</h3><p><code>-Xverify:none</code>可以用来关闭大部分验证过程</p>
+<ol>
+<li>文件格式验证(Class 文件格式)<br>魔数，主次版本，常量池规范……<br>检测完就存入方法区。</li>
+<li>元数据验证(语义分析)<br>有无父类，实现了接口的方法，字段、方法命名矛盾……</li>
+<li>字节码验证(控制流、数据流分析)<br>指令不可以乱跳，数据不可以随意操作。因为『Halting Problem』，JDK 1.7后不再推导数据流的合法性，而是使用类型检查(检查StackMapTable属性合法)</li>
+<li>符号引用验证(『解析』阶段发生)<br>符号引用的内容是否存在，是否有权限访问……</li>
+</ol>
+<h3 id="3-准备"><a href="#3-准备" class="headerlink" title="3. 准备"></a>3. 准备</h3><p>在方法区内，给类变量(static 变量)分配内存、赋<strong>零值</strong>，给 static final 变量赋<strong>初值</strong></p>
+<h3 id="4-解析"><a href="#4-解析" class="headerlink" title="4. 解析"></a>4. 解析</h3><p>即将符号引用解析为直接引用(指针、偏移量、句柄)</p>
+<blockquote>
+<p>除了<code>invokedynamic</code>指令，虚拟机只解析一次符号引用，并将其缓存  </p>
+<ol>
+<li>类/接口解析</li>
+</ol>
+<ul>
+<li>在当前代码中将符号引用解析C 类/接口：符号引用==(虚拟机查找)==&gt;C 的全限定名==(虚拟机交给)==&gt;当前类的加载器==(加载 C)==&gt;</li>
+<li>如果 C 是引用数组，按上述过程解析引用的类，再生成数组对象</li>
+</ul>
+<ol>
+<li>字段解析</li>
+</ol>
+<ul>
+<li>通过 CONSTANT_Class_info 找到字段所属类/接口C==&gt;找 C 中的匹配==&gt;继续找 C 的接口和父接口的匹配=&gt;找 C的父类树。找到为止。</li>
+<li>多个匹配同时存在于C 和 C 的接口树中，编译会失败</li>
+</ul>
+<ol>
+<li>类方法解析<br>同样的方法找到 C 的符号引用==&gt;C 是接口，抛出异常==&gt;找 C 中的匹配==&gt;找 C 父类树种的匹配==&gt;找接口树中的匹配，找到就抛异常。找到为止。</li>
+<li>接口方法解析<br>C 是类，抛异常==&gt;找 C 中的匹配==&gt;找 C 的父接口树。找到为止。</li>
+</ol>
+</blockquote>
+<h3 id="5-初始化"><a href="#5-初始化" class="headerlink" title="5. 初始化"></a>5. 初始化</h3><p>即执行类构造器<clinit>()方法的过程。</clinit></p>
+<ul>
+<li>编译器按顺序搜集 static 变量赋值动作、static 块，组成<clinit>()。没有则不生成<clinit>()。</clinit></clinit></li>
+<li><clinit>()执行不会触发父类<clinit>()，虚拟机保证已经执行了父类<clinit>()。意味着父类的静态语句执行顺序优先于子类。</clinit></clinit></clinit></li>
+<li><clinit>()只会被一个线程占有，且只执行一次。</clinit></li>
+</ul>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><ul>
+<li>被不同类加载器加载的类，必定不相等</li>
+<li>所有加载器继承自 java.lang.ClassLoader</li>
+</ul>
+<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><ol>
+<li>Bootstrap ClassLoader 加载<java_home>/lib 的类(虚拟机只认几个名字)</java_home></li>
+<li>Extension ClassLoader加载<java_home>_lib_ext 的类</java_home></li>
+<li>Application <java_home> 加载用户路径 ClassPath 的类<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-A6D08D2A64AB-1.png" alt=""></java_home></li>
+</ol>
+<ul>
+<li>双亲委派模型保证了Object 类在各个加载器环境中都相等<br>双亲委派模型的破坏：</li>
+<li>loadClass()方法里是双亲委派逻辑，不应更改。重写findClass()方法来加载自己的类。</li>
+<li>JNDI 通过 java.lang.Thread 的 setContextLoader()实现父加载器调用子加载器。</li>
+<li>OSGi 的加载器是网状结构。</li>
+</ul>
+<h1 id="早期-编译器-优化"><a href="#早期-编译器-优化" class="headerlink" title="早期(编译器)优化"></a>早期(编译器)优化</h1><h3 id="编译器种类"><a href="#编译器种类" class="headerlink" title="编译器种类"></a>编译器种类</h3><ul>
+<li>前端编译器(.java==&gt;.class)：如Javac</li>
+<li>JIT 编译器(.class==&gt;01)：HotSpot VM 的 C1、C2编译器</li>
+<li>AOT编译器(.java==&gt;01)</li>
+</ul>
+<h3 id="Javac-编译过程"><a href="#Javac-编译过程" class="headerlink" title="Javac 编译过程"></a>Javac 编译过程</h3><p><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%201.JPG" alt=""></p>
+<ol>
+<li>解析与填充符号表<ol>
+<li>词法分析： .class ==&gt; Token。”int a=b+2” 解析为6个不可再分的 Token：int, a, =, b, +, 2</li>
+<li>语法分析：Token==&gt;语法树(包、类型、修饰符、接口……)。</li>
+<li>填充符号表</li>
+</ol>
+</li>
+<li>插入式注解处理器的注解处理过程<br>注解可以增删改语法树中的任意元素。修改后返回填充符号表步骤。</li>
+<li>语义分析与字节码生成<ol>
+<li>标注检查。常量折叠： int a = 1 + 2 ==&gt; int a = 3</li>
+<li>数据、控制流分析。修饰的局部变量的final，在.class中消失</li>
+<li>解语法糖</li>
+<li>字节码生成</li>
+</ol>
+</li>
+</ol>
+<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><ol>
+<li>泛型与类型擦除<br>Java 中的泛型只在.java中存在，在.class中被替换成 Raw Type + 强制转型。<br>Map<string, string="">() ==&gt; Map()<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/000%202%201.JPG" alt=""><br>但是下面的可以编译成功，因为.class中的方法签名涉及到返回值<br><img src="/images/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/PNG%20image-4FB15011A977-1.png" alt=""></string,></li>
+<li>自动拆箱、装箱</li>
+</ol>
+<ul>
+<li>for( int i : list){} ==&gt; (1) Integer 包装 i；(2) .class中的迭代器</li>
+<li>IntegerA == IntegerB / intA，；只有遇到算数才自动拆箱。</li>
+</ul>
+<ol>
+<li>条件编译<br>根据if 判断中的常量，修剪条件分支</li>
+</ol>
+<p>代码质量检查工具：CheckStyle, FindBugs, Klocwork</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/28/Java并发编程的艺术(笔记)/" rel="next" title="Java并发编程的艺术(笔记)">
+                <i class="fa fa-chevron-left"></i> Java并发编程的艺术(笔记)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/12/CourseraSpark/" rel="prev" title="Coursera Spark学习笔记">
+                Coursera Spark学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Steed in Cyan" />
+            
+              <p class="site-author-name" itemprop="name">Steed in Cyan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:steedincyan@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.hilaryhahn.com" title="Hilary Hahn" target="_blank">Hilary Hahn</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jaschaheifetz.com" title="Jascha Heifetz" target="_blank">Jascha Heifetz</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内存区域与内存溢出异常"><span class="nav-number">1.</span> <span class="nav-text">内存区域与内存溢出异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时数据区域"><span class="nav-number">1.1.</span> <span class="nav-text">运行时数据区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-程序计数器"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 程序计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Java虚拟机栈"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. Java虚拟机栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-本地方法栈"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 本地方法栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Java堆"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. Java堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-方法区"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 方法区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-直接内存"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. 直接内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机中的对象"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟机中的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的内存布局"><span class="nav-number">1.2.1.</span> <span class="nav-text">对象的内存布局</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集器与内存分配策略"><span class="nav-number">2.</span> <span class="nav-text">垃圾收集器与内存分配策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象是否死亡"><span class="nav-number">2.1.</span> <span class="nav-text">对象是否死亡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型"><span class="nav-number">2.1.1.</span> <span class="nav-text">引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize-方法"><span class="nav-number">2.1.2.</span> <span class="nav-text">finalize()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法区的回收"><span class="nav-number">2.1.3.</span> <span class="nav-text">方法区的回收</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HostSpot寻找垃圾-可达性分析"><span class="nav-number">2.2.</span> <span class="nav-text">HostSpot寻找垃圾-可达性分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">2.3.</span> <span class="nav-text">垃圾收集器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配与回收策略"><span class="nav-number">2.4.</span> <span class="nav-text">内存分配与回收策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机工具"><span class="nav-number">3.</span> <span class="nav-text">虚拟机工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类加载机制"><span class="nav-number">4.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载过程"><span class="nav-number">4.1.</span> <span class="nav-text">类加载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-加载"><span class="nav-number">4.1.1.</span> <span class="nav-text">1. 加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-验证"><span class="nav-number">4.1.2.</span> <span class="nav-text">2.验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-准备"><span class="nav-number">4.1.3.</span> <span class="nav-text">3. 准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-解析"><span class="nav-number">4.1.4.</span> <span class="nav-text">4. 解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-初始化"><span class="nav-number">4.1.5.</span> <span class="nav-text">5. 初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器"><span class="nav-number">4.2.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双亲委派模型"><span class="nav-number">4.2.1.</span> <span class="nav-text">双亲委派模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#早期-编译器-优化"><span class="nav-number">5.</span> <span class="nav-text">早期(编译器)优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器种类"><span class="nav-number">5.0.1.</span> <span class="nav-text">编译器种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Javac-编译过程"><span class="nav-number">5.0.2.</span> <span class="nav-text">Javac 编译过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法糖"><span class="nav-number">5.0.3.</span> <span class="nav-text">语法糖</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Steed in Cyan</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.5</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.5"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.5"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.5"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.5"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.5"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.5"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.5"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
